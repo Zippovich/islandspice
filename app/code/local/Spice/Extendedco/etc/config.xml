@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Spice_Extendedco>
+            <version>0.2.5</version>
+        </Spice_Extendedco>
+    </modules>
+    <global>
+       <models>
+          <checkout>
+              <rewrite>
+                  <type_onepage>Spice_Extendedco_Model_Type_Onepage</type_onepage>
+              </rewrite>
+          </checkout>
+          <sales>
+              <rewrite>
+                  <service_quote>Spice_Extendedco_Model_Service_Quote</service_quote>
+              </rewrite>
+          </sales>
+       </models>
+       <blocks>
+          <extendedco>
+                  <class>Spice_Extendedco_Block</class>
+          </extendedco>
+       </blocks>
+    </global>
+    <frontend>
+        
+    </frontend>
+    
+    
+</config>
