@@ -1,0 +1,7 @@
+/* Contains hacks for IE6 */
+#body {height:100%}
+.products {width:518px}
+.menu a {height:43px}
+.menu li a:hover, .menu li a.active {height:70px}
+.png {behavior: url(content/js/iepngfix.htc)}
+/*.wrapper {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : "100%")}*/
