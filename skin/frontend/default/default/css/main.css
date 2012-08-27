@@ -180,7 +180,7 @@ body.homepage .menu, body.cms-home .menu {display:none}
 	
 .community-links {position: absolute; bottom: 30px; left: 0}
 
-#product_addtocart_form .form-button {
+#product_addtocart_form .form-button, .products .form-button {
 	border: 1px solid #292f6a;
 	background: #3276dc;
 	color: #fff;
@@ -189,6 +189,14 @@ body.homepage .menu, body.cms-home .menu {display:none}
 	-moz-border-radius: 3px; /* FF1+ */
 	-webkit-border-radius: 3px; /* Saf3-4 */
 	border-radius: 3px; /* Opera 10.5, IE9, Saf5, Chrome */
+}
+.products .description {
+    position: relative
+}
+.products .form-button {
+    position: absolute;
+    bottom: 0;
+    right: 0
 }
 
 .checkout-cart-index .box-2 .lb, .checkout-onepage-index .box-2 .lb, .checkout-onepage-success .box-2 .lb, .checkout-multishipping-login .box-2 .lb, .checkout-multishipping-register .box-2 .lb, .checkout-multishipping-addresses .box-2 .lb, .checkout-multishipping-shipping .box-2 .lb, .checkout-multishipping-billing .box-2 .lb, .checkout-multishipping-address-editshipping .box-2 .lb, .checkout-multishipping-address-newshipping .box-2 .lb, .checkout-multishipping-address-selectbilling .box-2 .lb, .checkout-multishipping-address-newbilling .box-2 .lb, .checkout-multishipping-address-editaddress .box-2 .lb, .checkout-multishipping-overview .box-2 .lb, .checkout-multishipping-success .box-2 .lb, .customer-account-forgotpassword .box-2 .lb, .customer-account-login .box-2 .lb, .customer-account-create .box-2 .lb, .customer-account-index .box-2 .lb, .customer-address-form .box-2 .lb, .customer-address-index .box-2 .lb, .customer-address-form .box-2 .lb, .newsletter-manage-index .box-2 .lb, .customer-account-edit .box-2 .lb, .sales-order-view .box-2 .lb, .sales-order-history .box-2 .lb, .cms-index-noroute .box-2 .lb {

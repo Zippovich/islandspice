@@ -25,7 +25,17 @@
        </blocks>
     </global>
     <frontend>
-        
+        <events>
+            <checkout_cart_product_add_after>
+                <observers>
+                    <spice_extendedco_event>
+                        <type>singleton</type>
+                        <class>Spice_Extendedco_Model_Card</class>
+                        <method>addCatalogUrlToSession</method>
+                    </spice_extendedco_event>
+                </observers>
+            </checkout_cart_product_add_after>
+        </events>
     </frontend>
     
     

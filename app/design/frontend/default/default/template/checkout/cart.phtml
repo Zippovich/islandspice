@@ -87,9 +87,15 @@
     </thead>
     <tfoot>
         <tr>
+            <?php
+                $categoryUrl = Mage::getSingleton('checkout/session')->getLastCategoryUrl();
+                if (!$categoryUrl) {
+                    $categoryUrl = $this->getContinueShoppingUrl();
+                }
+            ?>
             <td colspan="100" class="a-right">
                 <?php if($this->getContinueShoppingUrl()): ?>
-                    <button class="form-button-alt continue-shopping" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')" type="button"><span><?php echo $this->__('Continue Shopping') ?></span></button>
+                    <button class="form-button-alt continue-shopping" onclick="setLocation('<?php echo $categoryUrl ?>')" type="button"><span><?php echo $this->__('Continue Shopping') ?></span></button>
                 <?php endif; ?>
                 <button class="form-button-alt" type="submit"><span><?php echo $this->__('Update Shopping Cart') ?></span></button>
             </td>
