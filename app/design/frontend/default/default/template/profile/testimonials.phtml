@@ -1,0 +1,87 @@
+<?php
+/**
+ * Mason Web Development
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+//get all Profiles 
+$testimonials = $this->getTestimonials();
+$testimCounter = 0;
+?>
+<div class="box box-2">
+    <div class="t">
+        <div class="b">
+            <div class="r">
+                <div class="l">
+                    <div class="lt">
+                        <div class="rt">
+                            <div class="rb">
+                                <div class="lb">
+                                    <div style="padding: 20px">
+                                        <div class="breadcrumb">
+                                            <h1>Testimonials</h1>
+                                        </div>
+                                        <div class="fclear" style="margin-bottom: 16px"></div>
+                                        <?php
+                                        if (@$_REQUEST['testim_submit']) {
+                                            foreach ($_REQUEST as &$eachVariable)
+                                                $eachVariable = htmlspecialchars(trim($eachVariable));
+                                            $name = @$_REQUEST['testim_customer'];
+                                            $content = @$_REQUEST['testim_content'];
+
+                                            $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+                                            $sql = "INSERT INTO profile (category_id, content_heading, content, creation_time, update_time, is_active) VALUES(?, ?, ?, ?, ?, ?)";
+                                            $row = $write->query($sql, array(1, $name, $content, now(), now(), 0));
+
+                                            $lastInsertedId = Mage::getSingleton('core/resource')->getConnection('core_write')->lastInsertId();
+                                            $sql2 = "INSERT INTO profile_store (profile_id, store_id) VALUES (?, ?)";
+                                            $row2 = $write->query($sql2, array($lastInsertedId, 0));
+                                            echo "<h1 style='margin-top:40px;'>Thank you for your testimonial. It will be added to our site soon.</h1><br/>";
+                                        } else {
+                                            ?> 
+                                        
+                                            <?php if (!count($testimonials)):?>
+                                        
+                                            <h1 style="color:blue;">There are no testimonials yet. Write the first testimonial!</h1><br/>
+                                            <?php else: ?>
+                                            <h1 style="color:blue;">Add your testimonial:</h1>
+                                            <?php endif; ?>                                            
+                                            <div id="submitnew" style="margin: 10px 0 0 0;">
+                                                <form>
+                                                    Your Name:<br/><input type="text" value="" name="testim_customer" size="50" style="height:20px;" /><br/>
+                                                    Testimonial: <br/>
+                                                    <textarea cols="47" rows="5" name="testim_content" style="resize:none"></textarea><br/>
+                                                    <input type="submit" value="Add" name="testim_submit"/>        
+                                                </form>
+                                            </div>                                                
+                                        <?php } ?>
+                                            
+                                        <?php foreach ($testimonials as $n): ?>
+                                            <?php if ($n->getData("is_active")): ?>
+                                                <div class="ColumnLeft" style=" width: 100%; border-top: 1px solid #ddd; padding-bottom: 10px; padding-top: 10px; margin-top: 20px;">
+                                                    <h2><?php echo $this->formatDate($n->getData("creation_time")); ?> - <?php echo $n->getData("content_heading"); ?></h2>
+                                                    <p><?php echo $n->getContent(); ?></p>
+                                                    <?php $testimCounter++;?>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>    
+
+
+
+                                        
+                                        
+                                    </div>      		
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

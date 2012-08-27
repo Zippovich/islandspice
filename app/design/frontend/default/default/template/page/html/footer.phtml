@@ -1,0 +1,29 @@
+<div class="copyright">
+	<span>&copy; Island Spice Co</span> |
+	13901 SW 143 Ct. Unit #9, Miami-Fl 33186 |
+	1 786 473 3465 |
+	<a href="mailto:sales@islandspice.com">sales@islandspice.com</a>
+	<?php if ( $_SERVER['REQUEST_URI'] == "/" || $_SERVER['REQUEST_URI'] == "/index.php" || $_SERVER['REQUEST_URI'] == "/index.php/" || $_SERVER['REQUEST_URI'] == "/home" || $_SERVER['REQUEST_URI'] == "/home/" ) { ?>
+		<div class="community-links">
+			<a href="http://www.ups.com/WebTracking/track?loc=en_US&WT.svl=PNRO_L1"><img src="<?=$this->getSkinUrl('img/ups-logo.png')?>" alt="UPS" height="48" width="40" /></a>
+			<a href="http://www.facebook.com/pages/Island-Spice-Jamaica/161391712727"><img src="<?=$this->getSkinUrl('img/facebook-logo.png')?>" alt="Facebook" height="48" width="48" /></a>
+		</div>
+	<?php } ?> 
+</div>
+<div class="footer"><img src="<?=$this->getSkinUrl('img/jamaica_flag.gif')?>" alt="" /> "The National Spice of Jamaica"</div>
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-25460181-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript';
+ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>

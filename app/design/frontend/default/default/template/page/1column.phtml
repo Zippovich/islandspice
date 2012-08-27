@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body <?php echo $this->getBodyClass()?'class="'.$this->getBodyClass().'"':'' ?>>
+<div id="body">
+    <div class="page-holder">
+    <!-- start header -->
+	<div id="header"><?php echo $this->getChildHtml('header') ?></div>
+    <!-- end header -->
+	<!-- start content -->
+	<div id="content">
+<?php
+    if ($this->getRequest()->getModuleName() == 'cms' && $this->getRequest()->getActionName() == 'view') {
+		$pid = $this->getRequest()->getParam('page_id', false);
+		if ($pid != '2') {
+?>
+<div class="logo">
+	<img class="logo-text" src="<?php echo $this->getSkinUrl('img/spice-up-your-life.gif'); ?>" alt="" />
+	<a href="home"><img src="<?php echo $this->getSkinUrl('img/inner_logo.gif'); ?>" alt="" /></a>
+</div>
+<div class="box box-3">
+	<div class="t">
+		<div class="b">
+			<div class="r">
+				<div class="l">
+					<div class="lt">
+						<div class="rt">
+							<div class="rb">
+								<div class="lb">
+<?php
+		}
+	}
+	echo $this->getChildHtml('content');
+
+    if ($this->getRequest()->getModuleName() == 'cms' && $this->getRequest()->getActionName() == 'view') {
+		$pid = $this->getRequest()->getParam('page_id', false);
+		if ($pid != '2') {
+?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+		}
+	}
+?>
+	</div>
+    <!-- end content -->
+    </div>
+</div>
+<!-- start footer -->
+<div id="footer"><?php echo $this->getChildHtml('footer') ?></div>
+<!-- end footer -->
+</body>
+</html>

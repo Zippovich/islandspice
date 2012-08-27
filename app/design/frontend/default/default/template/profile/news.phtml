@@ -1,0 +1,35 @@
+<?php
+/**
+ * Mason Web Development
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php 
+// get all News 
+$news = $this->getNews();
+?>
+<h2>News &amp; Events<a title="News &amp; Events RSS" href="/profile/news/rss/"><img src="<?php echo $this->getSkinUrl('img/rss.png'); ?>" alt="News &amp; Events RSS" /></a></h2>
+<ul class="news-events">
+<?php $count = 0; ?>
+<?php foreach($news as $n): ?>
+	<?php if ($n->getData("is_active") && $count < 2):?>
+	<li>
+		<?php $newsUrl = $this->getUrl('profile/news/read', array("id" => $n->getData("profile_id")));?>
+		<?php if($n->getData("thumbnail")):?>
+			<a href="<?echo $newsUrl ?>">
+				<?php $marginPosition = ($n->getThumbnailAlign() == "left") ? "float: left; margin-right: 10px;" : "float: right; margin-left: 10px;";?>
+				<img src="<?php echo $n->getThumbnailResize(100) ?>" style="<?php echo $marginPosition; ?>"/>
+			</a>
+		<?php endif; ?>
+		<p class="ne-date"><?php echo $this->formatDate($n->getData("creation_time")); ?></p>
+		<p class="ne-title"><a href="<?echo $newsUrl ?>" title="<?php echo $n->getData("content_heading"); ?>"><?php echo $n->getData("content_heading"); ?></a></p>
+		<p><?php echo $n->getContent(256); ?></p>
+	</li>
+	<?php $count++; ?>
+	<?php endif; ?>
+<?php endforeach; ?>
+</ul>

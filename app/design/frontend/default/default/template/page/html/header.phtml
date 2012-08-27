@@ -1,0 +1,74 @@
+<?php
+    $top_nav = array(
+        '/home' => array('name' => 'Home', 'active' => false),
+        '/about' => array('name' => 'About Us', 'active' => false),
+        '/profile/testimonials' => array('name' => 'Testimonials', 'active' => false),
+        '/profile/recipes' => array('name' => 'Recipes', 'active' => false),
+        '/contact' => array('name' => 'Contact Us', 'active' => false)
+    );
+    
+    if(Mage::app()->getRequest()->getControllerName() == 'recipes')
+        $top_nav['/profile/recipes']['active'] = true;
+    elseif(Mage::app()->getRequest()->getControllerName() == 'testimonials')
+            $top_nav['/profile/testimonials']['active'] = true;
+    elseif(Mage::app()->getRequest()->getControllerName() == 'page'){
+        $current_page = Mage::getSingleton('cms/page')->getIdentifier();
+        switch ($current_page){
+            case 'contact':
+                $top_nav['/contact']['active'] = true;
+                break;
+            case 'about':
+                $top_nav['/about']['active'] = true;
+                break;
+            case 'home':
+                $top_nav['/home']['active'] = true;
+                break;            
+        }        
+    }
+?>
+
+<ul class="nav">
+    <?php 
+        foreach($top_nav as $uri => $item){
+            echo '<li><a href="'.$uri.'"'.($item['active']?' class="active"':'').'>'.$item['name'].'</a></li>';
+        }
+    ?>	
+	
+</ul>
+<ul class="nav policy">
+	<li><a href="/refund-policy">Refund policy</a></li>
+	<li><a href="/privacy-policy">Privacy policy</a></li>
+	<li>
+            <?php
+            if(Mage::helper("customer")->isLoggedIn()){
+            ?>
+            <a href="<?php echo Mage::helper("customer")->getLogoutUrl();?>">Logout</a>
+            <?php
+            } else {                
+            ?>
+            <a href="<?php echo Mage::helper("customer")->getLoginUrl();?>">Login</a>
+            <?php
+            }
+            ?>
+        </li>        
+	<li class="search">
+		<!--<input type="button" value="" class="btn-search" /><input class="txt" type="text" value="search" onfocus="(this.value=='search')?this.value='':this.select()" onblur="(this.value=='')?this.value='search':this.select()" />-->
+		<form id="search_mini_form" action="<?php echo $this->helper('catalogSearch')->getResultUrl() ?>" method="get">
+			<fieldset>
+				<div class="mini-search">
+					<input type="submit" value="" class="btn-search" />
+					<input id="search" type="text" class="input-text txt" name="<?php echo $this->helper('catalogSearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogSearch')->getEscapedQueryText() ?>" />
+					<!--input type="image" src="<?php echo $this->getSkinUrl('images/btn_mini_search.gif') ?>" alt="<?php echo $this->__('Search') ?>" /-->
+					<div id="search_autocomplete" class="search-autocomplete"></div>
+					<script type="text/javascript">
+					//<![CDATA[
+						var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+						searchForm.initAutocomplete('<?php echo $this->helper('catalogSearch')->getSuggestUrl() ?>', 'search_autocomplete');
+					//]]>
+					</script>
+				</div>
+			</fieldset>
+		</form>
+	</li>
+	<li class="mc-container"><?php echo $this->getChildHtml('cart_sidebar') ?></li>
+</ul>

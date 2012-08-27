@@ -76,7 +76,27 @@ body.cms-home #footer .copyright {position: relative}
 	#header ul li.search input.txt {height:14px}
 
 #content .leftcol {float:left; width:560px}
-#content .rightcol {position:relative; float:right; padding:480px 0 0 0; width:350px; margin-bottom:-150px; z-index:1}
+#content .leftcol.main-page-col {
+	float:none;
+	width:auto;
+	padding-bottom: 85px;
+}
+#content .leftcol.main-page-col .mask {
+	width:100%;
+	background:url(../img/bg-mask.png) 50% 0 no-repeat;
+	height:389px;
+	padding:0 9999px;
+	margin:0 -9999px;
+	position:absolute;
+	z-index:10;
+}
+#content .rightcol {position:relative; float:right; padding:480px 0 0 0; width:350px; margin: 30px 0 0; z-index:1}
+#content .rightcol.main-page-col {
+	float:none;
+	width: auto;
+	overflow:hidden;
+	padding: 0px 0 0 275px;
+}
 #content .rightcol .banner {margin:0 0 0 180px}
 #content .colleft {float:left; width:215px; margin-right:10px}
 #content .colright {float:right; width:170px}
@@ -100,14 +120,14 @@ ul.breadcrumbs {height:20px; margin:0 0 20px 0; padding:0; list-style:none}
 #content .paging p a:hover {color:#74b3dc}
 
 /* home menu banners */
-#content .rightcol h1 a {position:absolute; display:block; height:55px; padding:16px 0 0 85px; color:#fff; text-decoration:none; font-weight:bold; font-size:17px}
+#content .rightcol h1 a {float: left; padding:75px 0 0 5px; color:#fff; text-decoration:none; font-weight:bold; font-size:12px; width: 130px}
 	#content .rightcol h1 a span {color:#61a9d9; font-weight:normal; font-size:9px; display:block}
 	#content .rightcol h1.spices a {background:url(../img/home-spices.gif) no-repeat 0 0; top:20px; left:0}
 	#content .rightcol h1.sauces a {background:url(../img/home-sauces.gif) no-repeat 0 0; top:105px; left:75px}
 	#content .rightcol h1.flavor a {background:url(../img/home-flavor.gif) no-repeat 0 0; top:210px; left:105px}
 	#content .rightcol h1.coffee a {background:url(../img/home-coffee.gif) no-repeat 0 0; top:310px; left:80px}
 	#content .rightcol h1.spec a {background:url(../img/home-spec.gif) no-repeat 0 0; top:390px; left:0px}
-	#content .rightcol h1 a:hover {background-position:0 100%}
+	#content .rightcol h1 a:hover {background-position: 0 -129px}
 
 .content {padding:20px}
 
@@ -405,9 +425,18 @@ p.required {
 #content > .clear > .col-3 li {padding: 10px 0; border-top: 2px dotted #5097d5}
 #content > .clear > .col-3 li:first-child {padding-top: 0; border-top: none}
 
-#content .leftcol {position: relative; height: 482px; padding: 12px 0 0}
-#content .leftcol .logo-image {position: absolute; top: 12px; left: -161px}
+#content .leftcol {position: relative; height: 340px; padding: 30px 0 0}
+#content .leftcol .logo-image {position: absolute; top: -124px; left: -31px}
 
 .colright .featured-products {margin: 0 0 35px; position: relative}
 .colright .featured-products li {list-style: none; position: absolute; top: 0; left: 0}
 .colright .featured-products .fp-image {display: inline-block; float: none; margin: 0 0 13px; width: auto}
+
+#coin-slider img {
+	width:600px !important;
+}
+.page-holder {
+	width:100%;
+	overflow:hidden;
+	position:relative;
+}

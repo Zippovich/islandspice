@@ -1,0 +1,63 @@
+<?php $_productCollection=$this->getLoadedProductCollection() ?>
+<?php if(!$_productCollection->count()): ?>
+<div class="fclear" style="margin-bottom: 16px"></div>
+<?php $layer = Mage::getSingleton('catalog/layer') ?> 
+<?php $current_category = $layer->getCurrentCategory() ?>
+<?php $_categories = explode(',', $current_category->getChildren()) ?>
+<?php if($_imageUrl=$current_category->getImageUrl()):?>
+	<p align="center" style="padding: 10px 0 0"><img src="<?php echo $_imageUrl?>" alt="<?php echo $current_category->getName();?>" alt="<?php echo $current_category->getName();?>" /></p>
+<?php endif;?>
+<?php if($current_category->getDescription() != ''):?>
+	<p><?php echo $current_category->getDescription() ?></p>
+<?php endif;?>
+<div class="note-msg content">
+    <?php echo $this->__('There are no products matching the selection.') ?>
+</div>
+<?php else: ?>
+
+<?php echo $this->getToolbarHtml() ?>
+
+<div class="fclear" style="margin-bottom: 16px"></div>
+
+<?php $layer = Mage::getSingleton('catalog/layer') ?> 
+<?php $current_category = $layer->getCurrentCategory() ?>
+<?php $_categories = explode(',', $current_category->getChildren()) ?>
+<?php if($_imageUrl=$current_category->getImageUrl()):?>
+	<p align="center" style="padding: 10px 0 0"><img src="<?php echo $_imageUrl?>" alt="<?php echo $current_category->getName();?>" alt="<?php echo $current_category->getName();?>" /></p>
+<?php endif;?>
+<?php if($current_category->getDescription() != ''):?>
+	<p style="padding-left: 20px; padding-right: 20px"><?php echo $current_category->getDescription() ?></p>
+<?php endif;?>
+<?php if (count($_categories)): ?>
+    <!--ul-->
+    <?php foreach ($_categories as $_subcategory): ?>
+        <?php $subcat = Mage::getModel('catalog/category')->load($_subcategory) ?>
+        <?php if($subcat->getIsActive()): ?>
+            <!--li>
+                <b><a href="<?php echo $subcat->getUrl() ?>"><?php echo $subcat->getName() ?></a></b> (<?php echo $subcat->getProductCount() ?>) 
+            </li-->
+        <?php endif; ?>     
+    <?php endforeach; ?>
+    <!--/ul-->
+<?php endif; ?>
+
+<?php $_iterator = 0; ?>
+<div class="products"><table cellpadding="0" cellspacing="0"><tr>
+<?php foreach ($_productCollection as $_product): ?>
+	<td><div class="container">
+        <?php // Product Image ?>
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(38, 128); ?>" width="38" height="128" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" />
+        
+        <?php // Product description ?>
+        <div class="description">
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($_product->getName())?></a>
+            PRICE<br /> <b><?php echo $this->getPriceHtml($_product, true) ?></b>
+        </div>
+    </div></td>
+	<? $_iterator++; if($_iterator == 3) { $_iterator = 0; ?>
+	</tr><tr><td colspan="3" class="separator-td">&nbsp;</td></tr><tr>
+	<? } ?>
+<?php endforeach; ?>
+</tr></table></div>
+
+<?php endif; ?>

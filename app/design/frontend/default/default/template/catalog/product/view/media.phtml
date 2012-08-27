@@ -1,0 +1,49 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<table width="100%">
+	<tr valign="top">
+		<td style="padding-right:20px">
+			<p class="product-image-zoom">
+				<?php
+				if ($_product->getImage() != 'no_selection' && $_product->getImage()) {
+					
+					$src = $this->helper('catalog/image')->init($_product, 'image');
+					/*$size = getimagesize($src);
+					if ($size[0] > 200) {
+						$size[0] = 200;
+					}*/
+					
+					$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(200,null).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+				}
+				else {
+				    $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+				}
+				echo $_helper->productAttribute($_product, $_img, 'image')
+				?>
+			</p>
+			
+		</td>
+	
+<td style="padding-right:20px" align="center">
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="more-views">
+    <h4><?php echo $this->__('More Views') ?></h4>
+	<br />
+    <ul style="list-style:none; padding:0; margin:0">
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+        <li style="margin-bottom:10px">
+            <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=50,top=50,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+</td>
+<td>
+	<?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), nl2br($this->getProduct()->getDescription()), 'description') ?>
+</td>
+</tr>
+</table>

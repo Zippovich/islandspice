@@ -1,0 +1,28 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+<div class="breadcrumb">
+        <?php if (isset($currentCategory)):?>
+	<?php $currentCategory = Mage::registry('current_category');
+		$img_name = $currentCategory->getCorner_img();
+		if(!$img_name){
+			$parentCategory = Mage::getModel('catalog/category')->load($currentCategory->getParentId());
+			$img_name = $parentCategory->getCorner_img();
+		}
+	?>
+	<img src="<?=$this->getSkinUrl('img/'.$img_name)?>" alt="" />
+	<div class="info">
+    <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+        <?php if($_crumbInfo['link']): ?>
+            <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+        <?php elseif($_crumbInfo['last']): ?>
+            <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+        <?php else: ?>
+            <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+        <?php endif; ?>
+        <?php if(!$_crumbInfo['last']): ?>
+        &gt;
+        <?php endif; ?>
+    <?php endforeach; ?>
+	</div>
+        <?php endif; ?>
+</div>
+<?php endif; ?>

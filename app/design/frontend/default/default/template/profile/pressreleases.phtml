@@ -1,0 +1,42 @@
+<?php
+/**
+ * Mason Web Development
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+//get all Profiles 
+$pressreleases = $this->getPressreleases();
+?>
+<div style="padding: 20px">
+<div class="breadcrumb">
+<h1>Recipes</h1>
+</div>
+<div class="fclear" style="margin-bottom: 16px"></div>
+<div>
+<?php foreach($pressreleases as $n): ?>
+	<?php if ($n->getData("is_active")):?>
+		<div style="border-bottom: 1px solid #ddd; padding-bottom: 10px; padding-top: 10px;" class="clear">
+			<div class="clear" style="margin-bottom: 16px">
+			<?php $fileUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) . "media/" . $n->getData("file")?>
+			<?php $readUrl = $this->getUrl('profile/recipes/read', array("id" => $n->getData("profile_id"))); ?>
+			<?php if($n->getData("thumbnail")):?>
+				<?php $marginPosition = ($n->getThumbnailAlign() == "left") ? "float: left; margin-right: 10px;" : "float: right; margin-left: 10px;";?>
+				<img width="200px" src="<?php echo $n->getThumbnailResize(300) ?>" style="<?php echo $marginPosition; ?>"/>
+			<?php endif; ?>
+			<p><?php echo $this->formatDate($n->getData("creation_time"), 'full'); ?> <br/> 
+				<b><a href="<?echo $readUrl ?>"><?php echo $n->getData("content_heading"); ?></a></b>
+			</p>
+			</div>
+			<!--a class="grey" href="<?echo $fileUrl ?>">
+				Click here to download PDF
+			</a-->
+		</div>
+	<?php endif; ?>
+<?php endforeach; ?>
+</div>
+</div>

@@ -1,0 +1,55 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+?>
+<div class="box base-mini mini-cart">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+		
+	<?php if ($_cartQty>0): ?>
+		<div style="padding-top: 5px">
+		<?php if ($_cartQty==1): ?>
+			<?php echo $this->__('1 product in your cart') ?>
+		<?php else: ?>
+			<?php echo $this->__('%s products in your cart', $_cartQty) ?>
+		<?php endif ?>
+		</div>
+
+		<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+		<div class="actions">
+			<a href="<?php echo $this->getUrl('checkout/cart'); ?>" title="<?php echo $this->__('Edit Cart') ?>"><?php echo $this->__('Edit') ?></a> | <a href="<?php echo $this->getCheckoutUrl() ?>" title="<?php echo $this->__('Checkout') ?>"><?php echo $this->__('Checkout') ?></a>
+		</div>
+		<?php endif ?>
+
+    <?php else: ?>
+    <div style="line-height: 39px"><?php echo $this->__('Your cart is empty') ?></div>
+    <?php endif ?>
+</div>
+<!-- [ends] .cart-sidebar // -->

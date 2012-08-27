@@ -1,0 +1,46 @@
+<?php $_order = $this->getOrder() ?>
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 30px;">
+        <tbody>
+                <tr>
+                        <td width="50%" valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; background:#f8f7f5;">
+                                 How did you hear about us:
+                        </td>
+
+ <?php /*
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; background:#f8f7f5;">
+                                Gift message:
+                        </td>
+*/ ?>
+
+                </tr>
+                <tr>
+                    <td width="50%" valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; background:#f8f7f5;">
+                                <?php 
+                                    $text = $_order->getHowHear();
+                                    echo $text?$text:'&nbsp;';
+                                    ?>
+                    </td>
+                    <?php /*
+                    <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; background:#f8f7f5;">
+                        <?php
+                            $message = Mage::getModel('giftmessage/message');
+
+                            
+                            $gift_message_id = $_order->getGiftMessageId();
+                            if(!is_null($gift_message_id)) {
+                                $message->load((int)$gift_message_id);
+                                echo 'Sender: '.$message->getData('sender').'<hr>';
+                                echo 'Recipient: '.$message->getData('recipient').'<hr>';
+                                echo $message->getData('message');
+                            } else {
+                                echo "&nbsp;";
+                            }
+                        
+                        ?>
+                    </td>
+                     */ ?>
+                     
+                </tr>
+        </tbody>
+</table>

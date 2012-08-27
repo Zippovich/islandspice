@@ -1,0 +1,96 @@
+<script type="text/javascript">
+// <![CDATA[
+	var cur = 0;
+	
+	function rotate() {
+		var rProducts = $$('.colright .featured-products li');
+		var n = cur + 1;
+		if (n >= rProducts.length) {
+			n = 0;
+		}
+		
+		var coun = 0;
+		//rProducts.invoke('hide');
+		rProducts.each(function(element) {
+			if (coun == n) {
+				//element.show();
+				element.setStyle({
+					'display': 'block'
+				});
+				element.fade({ duration: 1.0, from: 0, to: 1 });
+			}
+			if (coun == cur) {
+				element.fade({ duration: 1.0, from: 1, to: 0 });
+			}
+			coun++;
+		});
+		
+		cur = n;
+	}
+
+	document.observe("dom:loaded", function() {
+		var rProducts = $$('.colright .featured-products li');
+		// Height
+		
+		var heights = [];
+		
+		rProducts.each(function(element) {
+			heights[heights.length] = element.getHeight();
+		});
+		
+		var ulHeight = 0;
+		for (var i=0; i < heights.length; i++) {
+			if (heights[i] > ulHeight) {
+				ulHeight = heights[i];
+			}
+		}
+		$$('.colright ul.featured-products').each(function(element) {
+			element.setStyle({
+				height: ulHeight + 'px'
+			});
+		});
+		
+		//rProducts.invoke('hide');
+		var coun2 = 0;
+		rProducts.each(function(element) {
+			if (coun2 != 0) {
+				element.fade({ duration: 0, from: 1, to: 0 });
+			}
+			coun2++;
+		});
+		//$$('.colright .featured-products li:first-child').invoke('show');
+		/*$$('.colright .featured-products li:first-child').each(function(element) {
+			element.addClassName('active');
+		});*/
+		
+		setInterval(rotate, 6000);
+	});
+// ]]>
+</script>
+
+<?php
+$_productCollection = $this->getLoadedProductCollection();
+if(!$_productCollection->count()) {
+}
+else {
+?>
+	<ul class="featured-products">
+<?php
+	foreach ($_productCollection as $_product) {
+?>
+		<li style="text-align: center">
+			<p class="fp-title"><a title="<?php echo $this->htmlEscape($_product->getName()) ?>" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a></p>
+			<div class="clear">
+				<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="fp-image">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(166, null); ?>" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" width="166" />
+					<span class="fp-price"><?php echo $this->getPriceHtml($_product, true) ?></span>
+				</a>
+			</div>
+		</li>
+<?php
+	}
+?>
+	</ul>
+<?php
+}
+?>

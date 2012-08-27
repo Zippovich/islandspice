@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body <?php echo $this->getBodyClass()?'class="'.$this->getBodyClass().'"':'' ?>>
+<div id="body">
+    <!-- start header -->
+	<div id="header">
+	<?php echo $this->getChildHtml('header') ?></div>
+    <!-- end header -->
+	<!-- start content -->
+	<div id="content">
+	
+	
+	
+		<div class="logo"><img class="logo-text" src="<?=$this->getSkinUrl('img/spice-up-your-life.gif')?>" alt="" /><a href="/home"><img src="<?=$this->getSkinUrl('img/inner_logo.gif')?>" alt="" /></a></div>
+		<div class="colleft">
+			<div class="box box-1"><div class="t"><div class="b"><div class="r"><div class="l"><div class="lt"><div class="rt"><div class="rb"><div class="lb">
+				<ul class="menu">
+				<?php 
+					$currentCategory = Mage::registry('current_category');	
+					if($currentCategory){
+						$cat_id = $currentCategory->getId();
+						$parent_id = $currentCategory->getParentId();
+					} else {
+						$cat_id = 0;
+						$parent_id = 0;
+					}
+				?>
+					<li class="spices"><a<?php if($cat_id == 38 || $parent_id == 38){?> class="active"<?php }?> href="/spices.html">SPICES <span>SPICES &amp; SEASONINGS</span></a></li>
+					<li class="sauces"><a<?php if($cat_id == 39 || $parent_id == 39){?> class="active"<?php }?> href="/sauces.html">SAUCES <span>HOT SAUCES &amp; MARINADES</span></a></li>
+					<li class="flavor"><a<?php if($cat_id == 40 || $parent_id == 40){?> class="active"<?php }?> href="/flavoring.html">FLAVORINGS <span>PURE &amp; ARTIFICIAL FLAVORINGS</span></a></li>
+					<li class="coffee"><a<?php if($cat_id == 41 || $parent_id == 41){?> class="active"<?php }?> href="/coffee.html">COFFEE <span>JAMAICA BLUE MOUNTAIN</span></a></li>
+					<li class="spec"><a<?php if($cat_id == 42 || $parent_id == 42){?> class="active"<?php }?> href="/specials.html">GIFT BASKETS <span>PROMOTIONS &amp; DEALS</span></a></li>
+				</ul>
+			</div></div></div></div></div></div></div></div></div>
+			
+		</div>
+		<div class="colright">
+			<?php echo $this->getChildHtml('promotions_and_deals') ?>
+			<?php echo $this->getChildHtml('right_block') ?>
+		</div>
+		<div class="colmain">
+			<div class="box box-2"><div class="t"><div class="b"><div class="r"><div class="l"><div class="lt"><div class="rt"><div class="rb"><div class="lb">
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
+				<?php echo $this->getChildHtml('content') ?>
+      		</div></div></div></div></div></div></div></div></div>
+		</div>
+		<div class="fclear"></div>
+	</div>
+    <!-- end content -->
+</div>
+<!-- start footer -->
+<div id="footer"><?php echo $this->getChildHtml('footer') ?></div>
+<!-- end footer -->
+</body>
+</html>

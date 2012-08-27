@@ -1,0 +1,31 @@
+<?php
+/**
+ * Mason Web Development
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+//get all Profiles 
+$pressreleases = $this->getPressreleases();
+?>
+<h2>Recipe of the month</h2>
+<?php foreach($pressreleases as $n): ?>
+	<?php if ($n->getData("on_home")):?>
+	<div style="margin-bottom: 16px">
+		<p class="rec-title"><span style="color: #ffcc99; font-size: medium;"><?php echo $n->getData("content_heading"); ?></span></p>
+		<p>
+			<?php if($n->getData("thumbnail")):?>
+				<?php $marginPosition = ($n->getThumbnailAlign() == "left") ? "float: left; margin-right: 10px;" : "float: right; margin-left: 10px;";?>
+				<img src="<?php echo $n->getThumbnailResize(100) ?>" style="<?php echo $marginPosition; ?>"/>
+			<?php endif; ?>
+		</p>
+		<?php echo $n->getData("short_content"); ?>
+		<?php $readUrl = $this->getUrl('profile/recipes/read', array("id" => $n->getData("profile_id"))); ?>
+		<p><a title="read full recipe" href="<?echo $readUrl ?>" style="color: #fff">read full recipe</a> | <a title="all recipies" href="/profile/recipes" style="color: #fff">all recipies</a></p>
+	</div>
+	<?php endif; ?>
+<?php endforeach; ?>

@@ -1,0 +1,43 @@
+<?php
+//$this->setCategoryId(52);
+
+/*$layer = $this->getLayer();
+$category = Mage::getModel('catalog/category')->load(52);
+	if ($category->getId()) {
+		$origCategory = $layer->getCurrentCategory();
+		$layer->setCurrentCategory($category);
+	}*/
+
+$_productCollection = $this->getLoadedProductCollection();
+if(!$_productCollection->count()) {
+}
+else {
+?>
+	<ul class="featured-products">
+<?php
+	foreach ($_productCollection as $_product) {
+?>
+		<li>
+			<p class="fp-title"><a title="<?php echo $this->htmlEscape($_product->getName()) ?>" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a></p>
+			<div class="clear">
+				<div class="fp-image">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(110, null); ?>" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" width="110" />
+					<div class="fp-price"><?php echo $this->getPriceHtml($_product, true) ?></div>
+				</div>
+				<div class="fp-text">
+					<p><?php echo nl2br($_product->getShortDescription()) ?></p>
+					<p><a title="more details" href="<?php echo $_product->getProductUrl() ?>">more details</a></p>
+				</div>
+				<form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form">
+					<input name="qty" type="hidden" class="input-text qty" id="qty" maxlength="12" value="1" />
+					<a class="buy-now-button" href="#" onclick="document.getElementById('product_addtocart_form').submit(); return false;">Buy Now</a>
+				</form>
+			</div>
+		</li>
+<?php
+	}
+?>
+	</ul>
+<?php
+}
+?>
