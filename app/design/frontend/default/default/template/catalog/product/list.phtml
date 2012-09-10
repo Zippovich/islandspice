@@ -94,7 +94,7 @@
 							<div class="description">
 								<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($_product->getName())?></a>
 								PRICE<br /> <b><?php echo $this->getPriceHtml($_product, true) ?></b>
-                                                                <button onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" class="form-button" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
+                                                                <button onclick="ajaxAddToCart('<?php echo $this->getAddToCartUrl($_product) ?>')" class="form-button" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
 							</div>
 						</div>
 					</td>
@@ -115,6 +115,56 @@
 				</tr>
 			</table>
 		</div>
+                <script>
+                    function ajaxAddToCart(urlAddToCart) {
+                        jQuery.ajax({
+                            url: urlAddToCart,
+                            type: 'POST',
+                            success: function() {
+                                // update header cart
+                                var qty_add = 1;
+                                var qty_old_container = jQuery('.mc-qty');
+                                if (qty_old_container.length) {
+                                    var qty_old = parseInt(qty_old_container.text());
+                                    qty_old_container.text(qty_old + qty_add);
+                                }
+                                else {
+                                    var insert_container = jQuery('.mini-cart');
+                                    var insert_html = '<div style="padding-top: 5px"><span class="mc-qty">1</span> product in your cart</div>';
+                                    insert_html += '<div class="actions"><a href="/checkout/cart/" title="Edit Cart">Edit</a> | <a href="/checkout/onepage/" title="Checkout">Checkout</a></div>';
+                                    insert_container.html(insert_html);
+                                }
+                                // show popup
+                                noty({
+                                    text: 'Product added to cart. Thank You!',
+                                    theme: 'default',
+                                    type: 'confirm',
+                                    layout: 'center',
+                                    modal: true,
+                                    buttons: [{
+                                        addClass: 'btn btn-primary',
+                                        text: 'Go to Cart',
+                                        onClick: function() {
+                                            window.location = '/checkout/cart/';
+                                        }
+                                    }, {
+                                        addClass: 'btn btn-primary',
+                                        text: 'Go to Checkout',
+                                        onClick: function() {
+                                            window.location = '/checkout/onepage/';
+                                        }
+                                    }, {
+                                        addClass: 'btn btn-danger',
+                                        text: 'Continue Shopping',
+                                        onClick: function($noty) {
+                                            $noty.close();
+                                        }
+                                    }]
+                                });
+                            }
+                        });
+                    }
+                </script>
 <?php
 	}
 ?>

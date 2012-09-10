@@ -366,7 +366,7 @@ p.required {
 #header ul.nav li.mc-container {
 	padding: 0 10px 0 35px;
 	background: url('../img/mini-cart-image.gif') 0 50% no-repeat;
-	width: 110px;
+	width: 120px;
 	letter-spacing: -1px
 }
 .pager td {padding: 0 5px}
@@ -447,4 +447,22 @@ p.required {
 	width:100%;
 	overflow:hidden;
 	position:relative;
+}
+
+/* Noty */
+.btn {
+    color: #fff;
+    border: 1px solid #333;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    -webkit-box-shadow: 1px 1px 2px 0px #333;
+    box-shadow: 1px 1px 2px 0px #333;
+    cursor: pointer
+}
+.btn.btn-primary {
+    background: #0074c0;
+}
+.btn.btn-danger {
+    background: #080;
 }

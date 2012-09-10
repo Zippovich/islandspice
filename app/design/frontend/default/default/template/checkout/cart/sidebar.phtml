@@ -36,9 +36,9 @@
 	<?php if ($_cartQty>0): ?>
 		<div style="padding-top: 5px">
 		<?php if ($_cartQty==1): ?>
-			<?php echo $this->__('1 product in your cart') ?>
+			<?php echo $this->__('<span class="mc-qty">1</span> product in your cart') ?>
 		<?php else: ?>
-			<?php echo $this->__('%s products in your cart', $_cartQty) ?>
+			<?php echo $this->__('<span class="mc-qty">%s</span> products in your cart', $_cartQty) ?>
 		<?php endif ?>
 		</div>
 

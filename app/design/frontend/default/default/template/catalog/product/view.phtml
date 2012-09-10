@@ -65,14 +65,62 @@
             productAddToCartForm.submit = function(){
                     if (this.validator.validate()) {
                             //this.form.submit();
-                            jQuery.noConflict();
+                            $_this = this;
                             jQuery(document).ready(function(jQuery) {
                                 jQuery.ajax({
-                                    url: $(this.form).attr('action'),
+                                    url: jQuery($_this.form).attr('action'),
                                     type: 'POST',
-                                    data: $(this.form).serialize(),
+                                    data: jQuery($_this.form).serialize(),
                                     success: function() {
-                                        alert(1);
+                                        // update header cart
+                                        var qty_add = jQuery('#qty').val();
+                                        if (qty_add == '') {
+                                            qty_add = 1;
+                                        }
+                                        var qty_old_container = jQuery('.mc-qty');
+                                        if (qty_old_container.length) {
+                                            var qty_old = parseInt(qty_old_container.text());
+                                            qty_old_container.text(qty_old + parseInt(qty_add));
+                                        }
+                                        else {
+                                            var insert_container = jQuery('.mini-cart');
+                                            var insert_html = '';
+                                            if (parseInt(qty_add) == 1) {
+                                                insert_html = '<div style="padding-top: 5px"><span class="mc-qty">1</span> product in your cart</div>';
+                                            }
+                                            else {
+                                                insert_html = '<div style="padding-top: 5px"><span class="mc-qty">' + qty_add + '</span> products in your cart</div>';
+                                            }
+                                            insert_html += '<div class="actions"><a href="/checkout/cart/" title="Edit Cart">Edit</a> | <a href="/checkout/onepage/" title="Checkout">Checkout</a></div>';
+                                            insert_container.html(insert_html);
+                                        }
+                                        // show popup
+                                        noty({
+                                            text: 'Product added to cart. Thank You!',
+                                            theme: 'default',
+                                            type: 'confirm',
+                                            layout: 'center',
+                                            modal: true,
+                                            buttons: [{
+                                                addClass: 'btn btn-primary',
+                                                text: 'Go to Cart',
+                                                onClick: function() {
+                                                    window.location = '/checkout/cart/';
+                                                }
+                                            }, {
+                                                addClass: 'btn btn-primary',
+                                                text: 'Go to Checkout',
+                                                onClick: function() {
+                                                    window.location = '/checkout/onepage/';
+                                                }
+                                            }, {
+                                                addClass: 'btn btn-danger',
+                                                text: 'Continue Shopping',
+                                                onClick: function($noty) {
+                                                    $noty.close();
+                                                }
+                                            }]
+                                        });
                                     }
                                 });
                             });
