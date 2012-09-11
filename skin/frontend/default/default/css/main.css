@@ -68,8 +68,8 @@ body.cms-home #footer .copyright {position: relative}
 	#header ul.policy li a {color:#a9d3fe}
 	#header ul.policy li a:hover {color:#fff}
 	#header ul.policy li {border:none; border-left:1px solid #0061a0}
-	#header ul.policy li.mc-container a {color:#fff; line-height: normal; height: auto; padding: 0; background: none; text-decoration: underline; display: inline; float: none}
-	#header ul.policy li.mc-container a:hover {text-decoration: none}
+	#header ul.nav li.mc-container a {color:#fff; line-height: normal; height: auto; padding: 0; background: none; text-decoration: underline; display: inline; float: none}
+	#header ul.nav li.mc-container a:hover {text-decoration: none}
 	
 	#header ul li.search {padding:10px 10px 0 0; border:none; height:29px}
 	#header ul li.search input {float:right}
@@ -364,10 +364,11 @@ p.required {
 	float: left
 }
 #header ul.nav li.mc-container {
-	padding: 0 10px 0 35px;
-	background: url('../img/mini-cart-image.gif') 0 50% no-repeat;
+	padding: 0 10px 0 45px;
+	background: url('../img/mini-cart-image.gif') 10px 50% no-repeat;
 	width: 120px;
-	letter-spacing: -1px
+	letter-spacing: -1px;
+        float: left
 }
 .pager td {padding: 0 5px}
 .pager .pages { margin:0 140px; }

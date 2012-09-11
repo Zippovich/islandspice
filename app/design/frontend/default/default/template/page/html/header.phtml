@@ -32,8 +32,8 @@
         foreach($top_nav as $uri => $item){
             echo '<li><a href="'.$uri.'"'.($item['active']?' class="active"':'').'>'.$item['name'].'</a></li>';
         }
-    ?>	
-	
+    ?>
+    <li class="mc-container"><?php echo $this->getChildHtml('cart_sidebar') ?></li>
 </ul>
 <ul class="nav policy">
 	<li><a href="/refund-policy">Refund policy</a></li>
@@ -70,5 +70,4 @@
 			</fieldset>
 		</form>
 	</li>
-	<li class="mc-container"><?php echo $this->getChildHtml('cart_sidebar') ?></li>
 </ul>
